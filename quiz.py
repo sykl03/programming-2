@@ -39,4 +39,14 @@ else:
 
 print(f"results:{counter}/5")
 results = counter / 5 * 100
-print(f"{results}%")
+print(f"{results}% is your mark buddy")
+if results == 100:
+    print("you got perfect!")
+elif results == 80:
+    print("sorry dude you just got one question wrong..")
+elif results == 60:
+    print("shake me head")
+elif results == 40:
+    print("i have no words :(")
+else:
+    print("uhhhhhhhhhhhhhhh keep working hard dude")
