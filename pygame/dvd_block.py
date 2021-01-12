@@ -5,6 +5,7 @@
 # Stretch goal: replace the vlock ith an image of the dvd logo (like the office segment)
 
 import pygame
+import random
 
 # ----- CONSTANTS
 BLACK = (0, 0, 0)
@@ -28,13 +29,6 @@ class Block():
         self.x_vel = 7
         self.y_vel = 0
 
-class Block_two():
-    def __init__(self):
-        self.x, self.y = (WIDTH/3, HEIGHT/3)
-        self.width, self.height = (125, 100)
-        self.colour = (YELLOW)
-        self.x_vel = 7
-        self.y_vel = 0
 
     def update(self):
         """updates the x- and y- location of the block based on its x_vel and y_vel
@@ -67,7 +61,10 @@ def main():
     clock = pygame.time.Clock()
 
     block = Block()
-    block.y_vel = -2
+    second_block = Block()
+    second_block.colour = YELLOW
+    second_block.y_vel = random.choice([-4, -2, 2, 4])
+    second_block.x_vel = random.choice([-4, -2, 2, 2])
 
 
     # ----- MAIN LOOP
@@ -80,7 +77,7 @@ def main():
         # ----- LOGIC
        # update the block's location
         block.update()
-        print(block.x, block.y)
+        second_block.update()
 
 
 
@@ -98,12 +95,12 @@ def main():
         )
         pygame.draw.rect(
             screen,
-            block.colour,
+            second_block.colour,
             [
-                block.x,
-                block.y,
-                block.width,
-                block.height,
+                second_block.x,
+                second_block.y,
+                second_block.width,
+                second_block.height,
             ]
         )
         # ----- UPDATE
