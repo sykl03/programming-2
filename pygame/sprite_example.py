@@ -36,11 +36,28 @@ class Player(pygame.sprite.Sprite):
 
         # rect
         self.rect = self.image.get_rect()
+class Enemy(pygame.sprite.Sprite):
+    def __init__(self, size = 5):
+      self.colour = WHITE
+      self.size = size
+      self.x = random.randrange(0, WIDTH)
+      self.y = random.randrange(0, HEIGHT)
+      self.x_vel = 4
+      self.y_vel = 3
+
+      self.image = pygame.Surface((35, 20))
+      self.image.fill((255, 0, 0))
+      self.circle = self.image.get_rect()
 
     def update(self):
         """move player with the mouse"""
         #pygame.mouse.get_pos()
         self.rect.center = pygame.mouse.get_pos()
+
+        # move the enemy
+        #self.x += self.x_vel
+        #self.y += self.y_vel
+
 
 def main():
     pygame.init()
@@ -58,6 +75,7 @@ def main():
     # create a group of sprites for all sprites
     all_sprites = pygame.sprite.Group()
     block_sprites = pygame.sprite.Group()
+    enemy_sprites = pygame.sprite.Group()
 
     # make lots of blocks on the screen
     for i in range(NUM_BLOCKS):
@@ -69,6 +87,10 @@ def main():
 
     player = Player()
     all_sprites.add(player)
+
+    enemy = Enemy()
+    all_sprites.add(enemy)
+    enemy_sprites.add(enemy)
 
 
     # ----- MAIN LOOP

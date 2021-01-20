@@ -58,6 +58,7 @@ def main():
         # ----- DRAW
         screen.fill(BLACK)
         pygame.draw.rect(screen, rectangle.colour, (rectangle.x, rectangle.y, rectangle.width, rectangle.height))
+        pygame.draw.circle(screen, (0, 255, 0), (100, 100), 50)
 
         # ----- UPDATE
         pygame.display.flip()
