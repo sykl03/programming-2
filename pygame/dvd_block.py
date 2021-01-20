@@ -1,11 +1,13 @@
 # dvdblock.py
-# Initial goal: get a block moving on the screen
-#   * x and y direction
-#   * modify its velocity
-# Stretch goal: replace the vlock ith an image of the dvd logo (like the office segment)
 
-import pygame
+# Initial goal: get a block moving on the screen
+#        * x and y direction
+#        * modify its velocity
+# Stretch goal: replace the block with an image of
+#        the dvd logo (like the Office Segment)
+
 import random
+import pygame
 
 # ----- CONSTANTS
 BLACK = (0, 0, 0)
@@ -16,36 +18,49 @@ WIDTH = 800
 HEIGHT = 600
 TITLE = "DVD Image"
 
-# class to represent rhe DVD Block
-#   * location in space
-#   * size
-#   * colour
+
 class Block():
     def __init__(self):
-        # initial location in the middle
+        # initial loc in the middle
         self.x, self.y = (WIDTH/2, HEIGHT/2)
         self.width, self.height = (125, 100)
-        self.colour = (SKY_BLUE)
-        self.x_vel = 7
-        self.y_vel = 0
-
+        self.colour = SKY_BLUE
+        self.x_vel = 5
+        self.y_vel = 5
 
     def update(self):
-        """updates the x- and y- location of the block based on its x_vel and y_vel
-
+        """updates the x- and y- location of the block
+        based on its x_vel and y_vel
         Returns: None
         """
         self.x += self.x_vel
         self.y += self.y_vel
 
-        # TODO: Bounce the block when it reached the sides
-        # TODO: for x
-        # if x + self.width > WIDTH --> x_vel * -1
+        # bounce block
         if self.x < 0 or self.x + self.width > WIDTH:
             self.x_vel *= -1
-        # TODO: y direction
         if self.y < 0 or self.y + self.height > HEIGHT:
             self.y_vel *= -1
+
+    def draw(self, screen):
+        """draws this block on the screen
+        Arguments:
+            screen - surface we draw on
+        Returns:
+            None
+        """
+        pygame.draw.rect(
+            screen,
+            self.colour,
+            [
+                self.x,
+                self.y,
+                self.width,
+                self.height,
+            ]
+        )
+
+
 
 
 def main():
@@ -62,10 +77,9 @@ def main():
 
     block = Block()
     second_block = Block()
-    second_block.colour = YELLOW
+    second_block.colour = WHITE
     second_block.y_vel = random.choice([-4, -2, 2, 4])
-    second_block.x_vel = random.choice([-4, -2, 2, 2])
-
+    second_block.x_vel = random.choice([-4, -2, 2, 4])
 
     # ----- MAIN LOOP
     while not done:
@@ -75,34 +89,15 @@ def main():
                 done = True
 
         # ----- LOGIC
-       # update the block's location
-        block.update()
+        block.update() # update the block's location
         second_block.update()
-
-
 
         # ----- DRAW
         screen.fill(BLACK)
-        pygame.draw.rect(
-            screen,
-            block.colour,
-            [
-                block.x,
-                block.y,
-                block.width,
-                block.height,
-            ]
-        )
-        pygame.draw.rect(
-            screen,
-            second_block.colour,
-            [
-                second_block.x,
-                second_block.y,
-                second_block.width,
-                second_block.height,
-            ]
-        )
+
+        block.draw(screen)
+        second_block.draw(screen)
+
         # ----- UPDATE
         pygame.display.flip()
         clock.tick(60)
