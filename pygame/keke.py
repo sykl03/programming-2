@@ -25,8 +25,8 @@ class Food(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
 
-        self.image = pygame.Surface((35, 20))
-        self.image.fill((255, 0, 255))
+        self.image = pygame.image.load("./images/cake.png")
+        self.image = pygame.transform.scale(self.image, (64, 64))
 
         self.rect = self.image.get_rect()
 
