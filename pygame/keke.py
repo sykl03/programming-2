@@ -23,7 +23,7 @@ class Food(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
 
-        self.image = pygame.image.load("./images/donut.png")
+        self.image = pygame.image.load("images/donut.png")
         self.image = pygame.transform.scale(self.image, (50, 50))
 
         self.rect = self.image.get_rect()
@@ -34,7 +34,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
 
         # image
-        self.image = pygame.image.load("./images/piglet.png")
+        self.image = pygame.image.load("images/piglet.png")
         self.image = pygame.transform.scale(self.image, (100, 100))
 
         self.rect = self.image.get_rect()
@@ -50,7 +50,7 @@ class Enemy(pygame.sprite.Sprite):
         super().__init__()
 
         # image
-        self.image = pygame.image.load("./images/lakitu.png")
+        self.image = pygame.image.load("images/lakitu.png")
         self.image = pygame.transform.scale(self.image, (100, 100))
         self.rect = self.image.get_rect()
         self.rect.center = (250, 250)
