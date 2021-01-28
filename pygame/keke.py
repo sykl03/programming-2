@@ -15,7 +15,7 @@ TITLE = "kekueater"
 NUM_FOOD = 50
 
 # TODO: Change player movements to keyboard
-# TODO: add bad food that makes player lose a life or end game
+# TODO: veggie that makes player lose a life or end game
 print("Hello, your goal is to eat cake. Don't eat the vegetables or you'll die!")
 
 
@@ -72,7 +72,19 @@ class Veggie(pygame.sprite.Sprite):
         super().__init__()
 
         # image
-        self.image.load("./images/carrot.png")
+        self.image = pygame.image.load("./images/carrot.png")
+        self.image = pygame.transform.scale(self.image, (100, 100))
+
+        self.rect = self.image.get_rect()
+        self.y_vel = 3
+
+    def update(self):
+        self.rect.y += self.y_vel
+
+        # if the snow reaches the bottom, reset its position
+        if self.rect.y > HEIGHT:
+            self.rect.y = random.randrange(-15, 0)
+
 
 
 
