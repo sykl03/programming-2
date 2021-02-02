@@ -1,5 +1,5 @@
 # do_nut_eat.py
-# player will eat cake heehoo
+# player will eat donut heehoo
 
 import pygame
 import random
@@ -15,13 +15,10 @@ TITLE = "kekueater"
 NUM_FOOD = 70
 MAX_VEGGIE = 7
 
-
-# TODO: Change player movements to keyboard
-# TODO: veggie that makes player lose a life or end game
+# Introduce the game
 print("Hello, your goal is to eat cake. Don't eat the vegetables or you'll lose 5 points! Your goal is to eat 50 donuts")
 
-
-
+# Introduce the classes
 class Food(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -30,7 +27,6 @@ class Food(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (50, 50))
 
         self.rect = self.image.get_rect()
-
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
@@ -46,7 +42,6 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         """Move player with the mouse"""
         self.rect.center = pygame.mouse.get_pos()
-
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
@@ -103,9 +98,10 @@ def main():
     # ----- LOCAL VARIABLES
     done = False
     clock = pygame.time.Clock()
-    score = 0
-    score_c = 0
+    score = 0 # score for donuts eaten
+    score_c = 0 # score for carrots eaton
 
+    # Different sprite groups
     all_sprites = pygame.sprite.Group()
     block_sprites = pygame.sprite.Group()
     enemy_sprites = pygame.sprite.Group()
@@ -120,6 +116,7 @@ def main():
         food.rect.x = random.randrange(WIDTH - food.rect.width)
         all_sprites.add(food)
         block_sprites.add(food)
+
     # player
     player = Player()
     all_sprites.add(player)
@@ -151,19 +148,17 @@ def main():
         for block in block_hit_list:
             score += 1
             print(score)
-        if score == 50:
+        if score == 50: # Winning condition
             print("You win!")
             quit()
 
-
-
-        # When the player hits the enemy
+        # When the player hits the enemy and losing condition
         enemy_hit_player = pygame.sprite.spritecollide(player, enemy_sprites, True)
         for player in enemy_hit_player:
             print("game over. Lakitu caught you! Please try again :)")
             quit()
 
-        # When the player eats the veggies
+        # When the player eats the veggies and losing condition
         veggie_hit_player = pygame.sprite.spritecollide(player, veggie_sprites, True)
         for veggie in veggie_hit_player:
             score -= 5
